@@ -1,9 +1,11 @@
 package com.luis.springcloud.eurekaserver.app.practica_reactor.service;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
 
+@Slf4j
 public class PedidosOnlineFlux {
     public static void main(String[] args) {
         //TODO Simulamos llegada de datos a partir de una consulta a una api externa
@@ -25,11 +27,19 @@ public class PedidosOnlineFlux {
                 onErrorReturn
             Al finalizar, mostrar un mensaje que diga: "Procesamiento de pedidos completado".*/
 
-//        Flux.fromIterable(preciosApiExterna)
-//                .map(precioCompleto -> {
-//                    String partes = precioCompleto.split(":")[1]
-//                })
-
+        Flux.fromIterable(preciosApiExterna)
+                .map(precioCompleto -> precioCompleto.split(":")).collectMap(nombre -> nombre[0].trim(),
+                        precio -> {
+                    try {
+                        return Double.parseDouble(precio[1].trim());
+                    }catch (NumberFormatException e){
+                        return 0.0;
+                    }
+                }).onErrorContinue((error, objeto) ->
+                        log.error("Ocurrio un {}, al parsear este elemento {}", error.getMessage(), objeto))
+                .subscribe(
+                        onContinue -> log.info("Nombre {}, precio{}", onContinue.keySet(), onContinue.values())
+                );
 
     }
 }
