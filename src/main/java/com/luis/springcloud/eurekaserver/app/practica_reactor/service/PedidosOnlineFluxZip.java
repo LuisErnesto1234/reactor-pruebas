@@ -24,21 +24,21 @@ public class PedidosOnlineFluxZip {
             Monitor x1 = 300.0
             TOTAL = 302.5*/
 
-        Flux<String> nameProductsFlux = Flux.just("Laptop", "Mouse", "Teclado", "Monitor");
-        Flux<BigDecimal> priceProductsFlux = Flux.just(BigDecimal.valueOf(1200.0), BigDecimal.valueOf(25.5),
-                BigDecimal.valueOf(75.0), BigDecimal.valueOf(300.0));
-        Flux<Integer> countOrdersProductsFlux = Flux.just(2, 5, 3, 1);
-
-        Flux<Product> productFlatMapFlux =
-                Flux.zip(nameProductsFlux, priceProductsFlux, countOrdersProductsFlux)
-                        .map(tuple -> Product.builder()
-                                .name(tuple.getT1())
-                                .price(tuple.getT2())
-                                .countOrder(tuple.getT3())
-                                .build());
-
-        productFlatMapFlux.subscribe(onContinue ->
-                System.out.println(onContinue.getName() + " X" + onContinue.getPrice() + " = " + onContinue.getPrice()));
+//        Flux<String> nameProductsFlux = Flux.just("Laptop", "Mouse", "Teclado", "Monitor");
+//        Flux<BigDecimal> priceProductsFlux = Flux.just(BigDecimal.valueOf(1200.0), BigDecimal.valueOf(25.5),
+//                BigDecimal.valueOf(75.0), BigDecimal.valueOf(300.0));
+//        Flux<Integer> countOrdersProductsFlux = Flux.just(2, 5, 3, 1);
+//
+//        Flux<Product> productFlatMapFlux =
+//                Flux.zip(nameProductsFlux, priceProductsFlux, countOrdersProductsFlux)
+//                        .map(tuple -> Product.builder()
+//                                .name(tuple.getT1())
+//                                .price(tuple.getT2())
+//                                .countOrder(tuple.getT3())
+//                                .build());
+//
+//        productFlatMapFlux.subscribe(onContinue ->
+//                System.out.println(onContinue.getName() + " X" + onContinue.getPrice() + " = " + onContinue.getPrice()));
     }
 }
 
@@ -49,5 +49,4 @@ public class PedidosOnlineFluxZip {
 class Product{
     private String name;
     private BigDecimal price;
-    private Integer countOrder;
 }
