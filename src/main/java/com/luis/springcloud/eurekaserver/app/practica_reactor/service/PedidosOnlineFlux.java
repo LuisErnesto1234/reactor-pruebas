@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025, Daza and/or its affiliates. All rights reserved.
+ * DAZA COMPANY PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
 package com.luis.springcloud.eurekaserver.app.practica_reactor.service;
 
 import lombok.extern.slf4j.Slf4j;
